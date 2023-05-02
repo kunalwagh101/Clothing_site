@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Addproducts
+{% endblock  %}
+
+
+{% block content %}
+       
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-2 "></div>
+      <div class="col-md-8 text-center "> 
+        {% include '_messages.html' %}
+        <h2 class="text-center mt-2 pt-3 pd-2 text-white bg-dark p-2 ">  Product</h2>
+        {% from "_formhelpers.html" import render_field %}
+        <form method="POST" class="pt-3" enctype="multipart/form-data">
+          <div>
+            {{ render_field(form.name,class="form-control border-dark") }}
+            {{ render_field(form.gender,class="form-control border-dark") }}
+            {{ render_field(form.discount,class="form-control border-dark") }}
+            {{ render_field(form.stock,class="form-control border-dark") }}
+            {{ render_field(form.discription,class="form-control border-dark") }}
+            {{ render_field(form.color,class="form-control border-dark") }}
+           
+
+            <div class="container pt-3">
+               <div class="row">
+                  <div class="col-md-4">  {{ render_field(form.image1,class="form-control border-dark") }}</div>
+                  <div class="col-md-4">  {{ render_field(form.image2,class="form-control border-dark") }}</div>
+                  <div class="col-md-4">  {{ render_field(form.image3,class="form-control border-dark") }}</div>
+
+               </div>
+
+            </div>
+
+
+        
+          </div>
+          <p><input type="submit"  class="btn btn-primary mt-3" value=Register> </p>
+        </form>
+
+
+      </div>
+      <div class="col-md-2 "></div>
+
+    </div>
+    
+     
+
+
+  </div>
+{% endblock  %}
