@@ -2,13 +2,45 @@ from flask import render_template,request,session,redirect,flash ,url_for
 from shop import app, db ,bcrypt
 from shop.admin.form import RegistrationForm ,Loginform
 from shop.admin.models import User
+from shop.products.models import Addproduct,Brand,Category
 import os
 
-@app.route('/')
+
+
+
+
+@app.route('/admin')
 def admin():
-    return render_template("admin/index.html" ,title= "admin page")
+    if "email" not in session  :
+        flash("you are not loggid in  " , "danger")
+        return redirect(url_for("login"))
+    products = Addproduct.query.all()
+
+    return render_template("admin/index.html" ,title= "admin page" ,products = products)
 
 
+
+
+
+@app.route('/brands')
+def brands():
+     if "email" not in session  :
+        flash("you are not loggid in  " , "danger")
+        return redirect(url_for("login"))
+     brands = Brand.query.order_by(Brand.id.desc()).all()
+     
+
+     return render_template("admin/brand.html",brands = brands )
+
+@app.route('/categorys')
+def categorys():
+     if "email" not in session  :
+        flash("you are not loggid in  " , "danger")
+        return redirect(url_for("login"))
+     categorys = Category.query.order_by(Category.id.desc()).all()
+     
+
+     return render_template("admin/brand.html",categorys = categorys )
 
 
 
@@ -43,7 +75,17 @@ def login():
     return render_template("admin/login.html",form = form ,title = "Login form")
         
 
+@app.route("/Logout")
+def Logout():
+    if "email" in session :
+        try  :
+            session.pop("email")
+            return redirect(url_for('login'))
 
+
+        except Exception as e :
+            print(e )
+    return redirect(url_for('login'))
 
       
 

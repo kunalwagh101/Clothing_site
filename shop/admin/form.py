@@ -11,8 +11,7 @@ class RegistrationForm(Form):
                                                      validators.EqualTo('confirm', message='Passwords must match')])
     confirm = PasswordField('Repeat Password',validators=[DataRequired()])
  
-
-
+    
 class Loginform(Form) :
         email = StringField('Email Address',validators= [Length(min=4, max=25),DataRequired(),Email() ] )
         password = PasswordField('Password', validators=[validators.DataRequired()])
